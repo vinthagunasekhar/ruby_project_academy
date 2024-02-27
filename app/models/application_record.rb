@@ -1,4 +1,3 @@
-# app/models/crypto.rb
-class Crypto < ApplicationRecord
-  # Add any necessary model logic here
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
 end
