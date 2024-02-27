@@ -1,0 +1,45 @@
+
+<div class="container">
+  <%= form_tag(cryptos_path, method: "get") do %>
+    <div class="form-group">
+      <%= label_tag(:filter, "Filter by name:") %>
+      <%= text_field_tag(:filter, params[:filter], class: "form-control") %>
+    </div>
+    <%= submit_tag("Search", name: nil, class: "btn btn-primary") %>
+  <% end %>
+
+  <% if @filter_prompt %>
+    <div class="alert alert-warning" role="alert">
+      Please provide a filter parameter to narrow down the results.
+    </div>
+  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Crypto Image</th>
+            <th scope="col">Crypto Name</th>
+            <th scope="col">Genesis Block Launch Date</th>
+            <th scope="col">24 hrs Price Change USD(%)</th>
+            <th scope="col"> Current Market Price</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          <% @cryptos.each do |crypto| %>
+            <tr>
+              <td><%= image_tag(crypto[:image_url], alt: crypto[:name], class: "img-fluid") %></td>
+              <td><%= link_to crypto[:name], crypto_details_path(crypto[:id]) %></td>
+              <td><%= crypto[:launch_date] %></td>
+              <td><%= number_to_percentage(crypto[:price_change_24h], precision: 2) %></td>
+              <td><%= number_to_currency(crypto[:current_price], unit: 'USD') %></td>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

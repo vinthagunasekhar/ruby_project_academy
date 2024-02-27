@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1><%= @crypto[:name] %></h1>
+      <%= image_tag(@crypto[:image_url], alt: @crypto[:name], class: "img-fluid") %>
+      <p><%= @crypto[:description] %></p>
+    </div>
+  </div>
+</div>
